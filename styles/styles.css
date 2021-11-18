@@ -11,7 +11,10 @@ strong{
     font-weight: bold;
 }
 
-/* --- Start Header --- */
+.hidden {
+    display: none;
+}
+/* --- Starting Header --- */
 .top-bar {
     width: 100%;
     height: 69px;
@@ -34,15 +37,13 @@ h2 {
     font-size: 20px;
 }
 /* --- Finish Header --- */
-
-/* --- Start Home page --- */
+/* --- Starting Home page - Kevin part --- */
 .home{
     margin: 146px auto;
     width: 1081px;
     padding-left: 15px;
     overflow-x: hidden;
 }
-
 .section-title{
     font-size: 20px;
     line-height: 23px;
@@ -50,8 +51,4 @@ h2 {
     display: flex;
     align-items: center;
     text-align: center;
-}
-
-.hidden {
-    display: none;
 }
