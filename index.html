@@ -8,9 +8,14 @@
     <link rel="stylesheet" href="styles/reset.css" />
     <link rel="stylesheet" href="styles/styles.css" />
     <link rel="stylesheet" href="styles/quizz_creation_mobile.css">
+    <link rel="stylesheet" href="styles/quizz_creation_desktop.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Using Font Awesome -->
+    <script src="https://kit.fontawesome.com/a4209fb277.js" crossorigin="anonymous"></script>
 
     <title>Buzz Quizz</title>
   </head>
@@ -20,8 +25,8 @@
         <h1 class="clickable" onclick="create_quizz()">BuzzQuizz</h1>
     </header>
 
-    <article class="home">
-        <section class="user-quizzes">
+    <article class="home hidden">
+        <section class="user-quizzes hidden">
         </section>
         <section class="all-quizzes">
             <div class="section-title">
@@ -31,6 +36,27 @@
             </div>
         </section>
     </article>
+
+
+
+    <!-- Quizz Creation -->
+    <article class="quizz-creation">
+        <section class="basic-info">
+            <h2>Comece pelo começo</h2>
+
+            <div class="info-entry">
+                <input class="title" placeholder="Título do seu quizz" />
+                <input class="image-URL" placeholder="URL da imagem do seu quizz" />
+                <input class="num-questions" placeholder="Quantidade de perguntas do quizz" />
+                <input class="num-levels" placeholder="Quantidade de níveis do quizz" />
+            </div>
+
+            <button onclick="validate_basic_info()">Prosseguir pra criar perguntas</button>
+        </section>
+    </article>
+
+    <!-- Used icons -->
+    <!-- "edit" and "plus" -->
 
     <!-- Using Ion-Icons -->
     <script
@@ -44,6 +70,12 @@
 
     <!-- Using Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <script src="scripts/render_html.js"></script>
+
+
+    <!-- Including Quizz Creation JS code -->
+    <script src="scripts/quizz_creation.js"></script>
+
   </body>
 </html>
