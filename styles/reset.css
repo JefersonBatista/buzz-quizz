@@ -39,7 +39,7 @@ body {
 ol, ul {
     list-style: none;
 }
-textarea:focus, input:focus, select:focus {
+textarea:focus, input:focus, select:focus, button {
     box-shadow: 0 0 0 0;
     border: 0 none;
     outline: 0;
