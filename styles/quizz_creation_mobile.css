@@ -1,4 +1,4 @@
-.quizz-creation .basic-info {
+.quizz-creation section {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,37 +8,82 @@
     width: 100%;
 }
 
-/* Basic info title */
-.quizz-creation .basic-info h2 {
+/* To switch between sections */
+.quizz-creation section.hidden {
+    display: none;
+}
+
+.quizz-creation section h2 {
     margin-top: 40px;
     margin-bottom: 50px;
+}
 
+/* Section and entry title */
+.quizz-creation section h2,
+.quizz-creation section h3 {
     font-weight: bold;
     font-style: normal;
     font-size: 20px;
 }
 
+/* Entry to group fields */
+.quizz-creation section .entry {
+    display: flex;
+    flex-direction: column;
+    
+    width: 100%;    
+}
 
-/* .info-entry to group info fields */
-.quizz-creation .basic-info .info-entry {
+.quizz-creation .basic-info .entry {
+    gap: 9px;
+    
+    margin-bottom: 53px;
+}
+
+.quizz-creation .questions .entry {
+    gap: 14px;
+    
+    margin-bottom: 32px;
+}
+
+
+.quizz-creation article {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 9px;
-
-    margin-bottom: 53px;
+    
+    width: 100%;
+    /* max-width of input + article padding (564 + 18)px */
+    max-width: 582px;
+    
     padding: 0 18px;
+    /* Separating articles within quizz creation (questions, levels) */
+    margin-bottom: 70px;
+}
+
+.quizz-creation article .collapsed {
+    display: flex;
+    justify-content: space-between;
 
     width: 100%;
 }
 
-.quizz-creation .basic-info input {
+.quizz-creation article .collapsed .fa-edit {
+    font-size: 20px;
+}
+
+.quizz-creation section input {
     width: 100%;
     max-width: 564px;
     height: 46px;
     border-radius: 5px;
 
     padding: 0 14px;
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-style: italic;
+    font-size: 19px;
 
     border: 1px solid #d1d1d1;
     background-color: white;

@@ -44,14 +44,66 @@
         <section class="basic-info">
             <h2>Comece pelo começo</h2>
 
-            <div class="info-entry">
-                <input class="title" placeholder="Título do seu quizz" />
-                <input class="image-URL" placeholder="URL da imagem do seu quizz" />
-                <input class="num-questions" placeholder="Quantidade de perguntas do quizz" />
-                <input class="num-levels" placeholder="Quantidade de níveis do quizz" />
-            </div>
+            <article>
+                <div class="entry">
+                    <input class="title" placeholder="Título do seu quizz" />
+                    <input class="image-URL" placeholder="URL da imagem do seu quizz" />
+                    <input class="num-questions" placeholder="Quantidade de perguntas do quizz" />
+                    <input class="num-levels" placeholder="Quantidade de níveis do quizz" />
+                </div>
+            </article>
 
             <button onclick="validate_basic_info()">Prosseguir pra criar perguntas</button>
+        </section>
+
+        <section class="questions hidden">
+            <h2>Crie suas perguntas</h2>
+
+            <article class="question">
+                <div class="entry">
+                    <h3 class="title">Pergunta 1</h3>
+                    <input class="text" placeholder="Texto da pergunta" />
+                    <input class="background" placeholder="Cor de fundo da pergunta" />
+                </div>
+    
+                <div class="correct-answer entry">
+                    <h3 class="title">Resposta correta</h3>
+                    <input class="text" placeholder="Resposta correta" />
+                    <input class="image" placeholder="URL da imagem" />
+                </div>
+    
+                <div class="incorrect-answers entry">
+                    <h3 class="title">Respostas incorretas</h3>
+                    <input class="text" placeholder="Resposta incorreta 1" />
+                    <input class="image" placeholder="URL da imagem 1" />
+                </div>
+    
+                <!-- Other incorrect answers -->
+                <div class="incorrect-answers entry">
+                    <input class="text" placeholder="Resposta incorreta 2" />
+                    <input class="image" placeholder="URL da imagem 2" />
+                </div>
+                <div class="incorrect-answers entry">
+                    <input class="text" placeholder="Resposta incorreta 3" />
+                    <input class="image" placeholder="URL da imagem 3" />
+                </div>
+            </article>
+
+            <!-- <article class="question">
+                <div class="collapsed">
+                    <h3 class="title">Pergunta 2</h3>
+                    <i class="far fa-edit"></i>
+                </div>
+            </article>
+
+            <article class="question">
+                <div class="collapsed">
+                    <h3 class="title">Pergunta 3</h3>
+                    <i class="far fa-edit"></i>
+                </div>
+            </article> -->
+
+            <button onclick="validate_questions()">Prosseguir pra criar níveis</button>
         </section>
     </article>
 
