@@ -46,6 +46,11 @@
     margin-bottom: 32px;
 }
 
+.quizz-creation .levels .entry {
+    gap: 14px;
+
+    margin-bottom: 70px;
+}
 
 .quizz-creation article {
     display: flex;
@@ -72,27 +77,38 @@
     font-size: 20px;
 }
 
-.quizz-creation section input {
+.quizz-creation section input,
+.quizz-creation section textarea {
     width: 100%;
     max-width: 564px;
-    height: 46px;
     border-radius: 5px;
-
+    
     padding: 0 14px;
-
+    
     font-family: 'Roboto', sans-serif;
     font-weight: normal;
     font-style: italic;
     font-size: 19px;
-
+    
     border: 1px solid #d1d1d1;
     background-color: white;
+}
+
+.quizz-creation section input {
+    height: 46px;
+}
+
+.quizz-creation section textarea {
+    padding: 10px;
+    height: 177px;
 }
 
 .quizz-creation button {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    margin-bottom: 30px;
 
     /* Width relative to viewport width */
     width: 85vw;
@@ -106,4 +122,30 @@
 
     color: #fff5f4;
     background-color: #ec362d;
+}
+
+.quizz-creation .created-quizz {
+    position: relative;
+}
+
+.quizz-creation .created-quizz img {
+    width: 100%;
+    max-width: 500px;
+}
+
+.quizz-creation .created-quizz .title {
+    position: absolute;
+    bottom: 23px;
+    left: 23px;
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 23px;
+
+    color: white;
+}
+
+.quizz-creation .go-to-home {
+    font-family: 'Roboto', sans-serif;
 }
