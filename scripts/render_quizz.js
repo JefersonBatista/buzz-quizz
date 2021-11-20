@@ -11,7 +11,7 @@ function resetQuizzGame(id){
     quizzGame.innerHTML = `<div class="banner">
     </div>
     <main class="questions">
-        <section class="question">
+        <section class="option">
             <div class="alternatives">
             </div>
         </section>
@@ -78,7 +78,7 @@ function renderQuestions() {
             correctAnswers.push(questions[i].answers[alternative[j]].isCorrectAnswer);
         }
         questionsQuizz.innerHTML += `
-        <section class="question">
+        <section class="option">
             <h3 class="question-text">${questions[i].title}</h3>
             <div class="alternatives">
                 ${stringAlternatives}
@@ -134,17 +134,17 @@ function calcScore() {
 }
 
 function getCurrentQuestionIndex(choice) {
-    let DOMQuestions = document.querySelectorAll(".question");
-    let question = choice.parentNode.parentNode;
+    let DOMQuestions = document.querySelectorAll(".option");
+    let option = choice.parentNode.parentNode;
     for (i = 0; i < DOMQuestions.length; i++) {
-        if (DOMQuestions[i] === question) {
+        if (DOMQuestions[i] === option) {
             return i;
         }
     }
 }
 
 function autoScroll(currentIndex) {
-    let DOMQuestions = document.querySelectorAll(".question");
+    let DOMQuestions = document.querySelectorAll(".option");
     for (let i = currentIndex; i < DOMQuestions.length + currentIndex; i++) {
         if (!DOMQuestions[i % (DOMQuestions.length)].lastElementChild.classList.contains("answered")) {
             DOMQuestions[i % (DOMQuestions.length)].scrollIntoView({block:"center", behavior:"smooth"});

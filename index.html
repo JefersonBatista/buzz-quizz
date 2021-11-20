@@ -1,156 +1,154 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link rel="stylesheet" href="styles/reset.css" />
-        <link rel="stylesheet" href="styles/header_home_quizzes-server.css" />
-        <link rel="stylesheet" href="styles/loading_pages.css">
-        <link rel="stylesheet" href="styles/quizz_creation_mobile.css">
-        <link rel="stylesheet" href="styles/quizz_creation_desktop.css">
+    <link rel="stylesheet" href="styles/reset.css" />
+    <link rel="stylesheet" href="styles/header_home_quizzes-server.css" />
+    <link rel="stylesheet" href="styles/loading_pages.css">
+    <link rel="stylesheet" href="styles/quizz_creation_mobile.css">
+    <link rel="stylesheet" href="styles/quizz_creation_desktop.css">
 
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
-        <!-- Using Font Awesome -->
-        <script src="https://kit.fontawesome.com/a4209fb277.js" crossorigin="anonymous"></script>
+    <!-- Using Font Awesome -->
+    <script src="https://kit.fontawesome.com/a4209fb277.js" crossorigin="anonymous"></script>
 
-        <title>Buzz Quizz</title>
-    </head>
-    <body>
-        <header class="top-bar">
-            <h1 class="clickable" onclick="changePage(0)">BuzzQuizz</h1>
-        </header>
-        <article class="home">
-            <section class="user-quizzes ">
-            </section>
-            <section class="all-quizzes">
-                <div class="section-title">
-                    <strong>Todos os Quizzes</strong>
-                </div>
-                <div class="quizz-box">
-                </div>
-            </section>
-        </article>
-        <article class="quizz-game hidden">
-            <div class="banner">
-            </div>
-            <main class="questions">
-                <section class="question">
-                    <div class="alternatives">
-                    </div>
-                </section>
-            </main>
-            <section class="results">
-            </section>
-            <button class="reload-quizz">Reiniciar Quizz</button>
-            <button class="back-home" onclick="changePage(0)">Voltar para Home</button>
-        </article>
-
-
-
-        <!-- Quizz Creation -->
-        <article class="quizz-creation hidden">
-            <section class="basic-info">
-                <h2>Comece pelo começo</h2>
-
-                <article>
-                    <div class="entry">
-                        <input class="title" placeholder="Título do seu quizz" />
-                        <input class="image-URL" placeholder="URL da imagem do seu quizz" />
-                        <input class="num-questions" placeholder="Quantidade de perguntas do quizz" />
-                        <input class="num-levels" placeholder="Quantidade de níveis do quizz" />
-                    </div>
-                </article>
-
-                <button onclick="validate_basic_info()">Prosseguir pra criar perguntas</button>
-            </section>
-
-            <section class="questions hidden">
-                <h2>Crie suas perguntas</h2>
-
-                <article class="question">
-                    <div class="entry">
-                        <h3 class="title">Pergunta 1</h3>
-                        <input class="text" placeholder="Texto da pergunta" />
-                        <input class="background" placeholder="Cor de fundo da pergunta" />
-                    </div>
-        
-                    <div class="correct-answer entry">
-                        <h3 class="title">Resposta correta</h3>
-                        <input class="text" placeholder="Resposta correta" />
-                        <input class="image" placeholder="URL da imagem" />
-                    </div>
-        
-                    <div class="incorrect-answers entry">
-                        <h3 class="title">Respostas incorretas</h3>
-                        <input class="text" placeholder="Resposta incorreta 1" />
-                        <input class="image" placeholder="URL da imagem 1" />
-                    </div>
-        
-                    <!-- Other incorrect answers -->
-                    <div class="incorrect-answers entry">
-                        <input class="text" placeholder="Resposta incorreta 2" />
-                        <input class="image" placeholder="URL da imagem 2" />
-                    </div>
-                    <div class="incorrect-answers entry">
-                        <input class="text" placeholder="Resposta incorreta 3" />
-                        <input class="image" placeholder="URL da imagem 3" />
-                    </div>
-                </article>
-
-                <!-- <article class="question">
-                    <div class="collapsed">
-                        <h3 class="title">Pergunta 2</h3>
-                        <i class="far fa-edit"></i>
-                    </div>
-                </article>
-
-                <article class="question">
-                    <div class="collapsed">
-                        <h3 class="title">Pergunta 3</h3>
-                        <i class="far fa-edit"></i>
-                    </div>
-                </article> -->
-
-                <button onclick="validate_questions()">Prosseguir pra criar níveis</button>
-            </section>
-        </article>
-
-        <div class="loading-page hidden">
-            <div class="loadingio-spinner-spinner-uhtc9eei4cp"><div class="ldio-l19s765inah">
-                <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-                </div></div>
-            <div>
-                <span>Carregando</span>
-            </div>
+    <title>Buzz Quizz</title>
+</head>
+<body>
+  <header class="top-bar">
+    <h1 class="clickable" onclick="changePage(0)">BuzzQuizz</h1>
+</header>
+<article class="home">
+    <section class="user-quizzes ">
+    </section>
+    <section class="all-quizzes">
+        <div class="section-title">
+            <strong>Todos os Quizzes</strong>
         </div>
+        <div class="quizz-box">
+        </div>
+    </section>
+</article>
+<article class="quizz-game hidden">
+    <div class="banner">
+    </div>
+    <main class="questions">
+        <section class="option">
+            <div class="alternatives">
+            </div>
+        </section>
+    </main>
+    <section class="results">
+    </section>
+    <button class="reload-quizz">Reiniciar Quizz</button>
+    <button class="back-home" onclick="changePage(0)">Voltar para Home</button>
+</article>
 
-        <!-- Used icons -->
-        <!-- "edit" and "plus" -->
-
-        <!-- Using Ion-Icons -->
-        <script
-            type="module"
-            src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-        ></script>
-        <script
-            nomodule
-            src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-        ></script>
-
-        <!-- Using Axios -->
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-        <script src="scripts/render_homepage.js"></script>
-        <script src="scripts/render_quizz.js"></script>
 
 
-        <!-- Including Quizz Creation JS code -->
-        <script src="scripts/quizz_creation.js"></script>
+<!-- Quizz Creation -->
+<article class="quizz-creation hidden">
+    <section class="basic-info">
+        <h2>Comece pelo começo</h2>
 
-    </body>
+        <article>
+            <div class="entry">
+                <input class="title" placeholder="Título do seu quizz" />
+                <input class="image-URL" placeholder="URL da imagem do seu quizz" />
+                <input class="num-questions" placeholder="Quantidade de perguntas do quizz" />
+                <input class="num-levels" placeholder="Quantidade de níveis do quizz" />
+            </div>
+        </article>
+
+        <button onclick="validate_basic_info()">Prosseguir pra criar perguntas</button>
+    </section>
+
+    <section class="v hidden">
+        <h2>Crie suas perguntas</h2>
+
+        <article class="question">
+            <div class="entry">
+                <h3 class="title">Pergunta 1</h3>
+                <input class="text" placeholder="Texto da pergunta" />
+                <input class="background" placeholder="Cor de fundo da pergunta" />
+            </div>
+
+            <div class="correct-answer entry">
+                <h3 class="title">Resposta correta</h3>
+                <input class="text" placeholder="Resposta correta" />
+                <input class="image" placeholder="URL da imagem" />
+            </div>
+
+            <div class="incorrect-answers entry">
+                <h3 class="title">Respostas incorretas</h3>
+                <input class="text" placeholder="Resposta incorreta 1" />
+                <input class="image" placeholder="URL da imagem 1" />
+            </div>
+
+            <!-- Other incorrect answers -->
+            <div class="incorrect-answers entry">
+                <input class="text" placeholder="Resposta incorreta 2" />
+                <input class="image" placeholder="URL da imagem 2" />
+            </div>
+            <div class="incorrect-answers entry">
+                <input class="text" placeholder="Resposta incorreta 3" />
+                <input class="image" placeholder="URL da imagem 3" />
+            </div>
+        </article>
+
+        <!-- <article class="question">
+            <div class="collapsed">
+                <h3 class="title">Pergunta 2</h3>
+                <i class="far fa-edit"></i>
+            </div>
+        </article>
+        <article class="question">
+            <div class="collapsed">
+                <h3 class="title">Pergunta 3</h3>
+                <i class="far fa-edit"></i>
+            </div>
+        </article> -->
+
+        <button onclick="validate_questions()">Prosseguir pra criar níveis</button>
+    </section>
+</article>
+
+<div class="loading-page hidden">
+    <div class="loadingio-spinner-spinner-uhtc9eei4cp"><div class="ldio-l19s765inah">
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        </div></div>
+    <div>
+        <span>Carregando</span>
+    </div>
+</div>
+
+    <!-- Used icons -->
+    <!-- "edit" and "plus" -->
+
+    <!-- Using Ion-Icons -->
+    <script
+    type="module"
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+></script>
+<script
+    nomodule
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+></script>
+
+     <!-- Using Axios -->
+     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="scripts/render_homepage.js"></script>
+    <script src="scripts/render_quizz.js"></script>
+
+    <!-- Including Quizz Creation JS code -->
+    <script src="scripts/quizz_creation.js"></script>
+  </body>
 </html>
+
