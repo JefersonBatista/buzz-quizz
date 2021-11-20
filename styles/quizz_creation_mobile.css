@@ -122,15 +122,25 @@
 
     color: #fff5f4;
     background-color: #ec362d;
+
+    cursor: pointer;
 }
 
 .quizz-creation .created-quizz {
     position: relative;
+
+    margin-bottom: 70px;
+
+    cursor: pointer;
 }
 
 .quizz-creation .created-quizz img {
     width: 100%;
     max-width: 500px;
+
+    border-radius: 5px;
+
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.62%, rgba(0, 0, 0, 0.8) 100%), url(.png);
 }
 
 .quizz-creation .created-quizz .title {
@@ -147,5 +157,14 @@
 }
 
 .quizz-creation .go-to-home {
+    margin-bottom: 30px;
+    
     font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 21px;
+
+    color: #818181;
+
+    cursor: pointer;
 }

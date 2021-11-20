@@ -1,17 +1,9 @@
 @media (min-width: 1100px) {    
-    /* Basic info spacing */
-    .quizz-creation .basic-info h2 {
+    .quizz-creation section h2 {
         margin-top: 70px;
         margin-bottom: 50px;
-    }
 
-    .quizz-creation section h2 {
         font-size: 23px;
-    }
-
-    /* Entry to group info fields */
-    .quizz-creation .basic-info .entry {
-        margin-bottom: 109px;
     }
 
     .quizz-creation button {

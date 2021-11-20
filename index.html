@@ -57,7 +57,7 @@
 
         <!-- Quizz Creation -->
         <article class="quizz-creation">
-            <section class="basic-info hidden">
+            <section class="basic-info">
                 <h2>Comece pelo começo</h2>
 
                 <article>
@@ -77,19 +77,19 @@
 
                 <article class="question">
                     <div class="entry">
-                        <h3 class="title">Pergunta 1</h3>
+                        <h3>Pergunta 1</h3>
                         <input class="text" placeholder="Texto da pergunta" />
                         <input class="background" placeholder="Cor de fundo da pergunta" />
                     </div>
         
                     <div class="correct-answer entry">
-                        <h3 class="title">Resposta correta</h3>
+                        <h3>Resposta correta</h3>
                         <input class="text" placeholder="Resposta correta" />
                         <input class="image" placeholder="URL da imagem" />
                     </div>
         
                     <div class="incorrect-answers entry">
-                        <h3 class="title">Respostas incorretas</h3>
+                        <h3>Respostas incorretas</h3>
                         <input class="text" placeholder="Resposta incorreta 1" />
                         <input class="image" placeholder="URL da imagem 1" />
                     </div>
@@ -108,14 +108,14 @@
                 <!-- I am not working with collapsed yet -->
                 <!-- <article class="question">
                     <div class="collapsed">
-                        <h3 class="title">Pergunta 2</h3>
+                        <h3>Pergunta 2</h3>
                         <i class="far fa-edit"></i>
                     </div>
                 </article>
 
                 <article class="question">
                     <div class="collapsed">
-                        <h3 class="title">Pergunta 3</h3>
+                        <h3>Pergunta 3</h3>
                         <i class="far fa-edit"></i>
                     </div>
                 </article> -->
@@ -123,38 +123,38 @@
                 <button onclick="validate_questions()">Prosseguir pra criar níveis</button>
             </section>
 
-            <section class="levels">
+            <section class="levels hidden">
                 <h2>Agora, decida os níveis</h2>
 
                 <article class="level">
                     <div class="entry">
-                        <h3 class="title">Nível 1</h3>
+                        <h3>Nível 1</h3>
                         <input class="title" placeholder="Título do nível" />
-                        <input class="goal" placeholder="% de acerto mínima" />
+                        <input class="min-value" placeholder="% de acerto mínima" />
                         <input class="image" placeholder="URL da imagem do nível" />
                         <textarea class="description" placeholder="Descrição do nível"></textarea>
                     </div>
                 </article>
 
                 <!-- I am not working with collapsed yet -->
-                <article class="level">
+                <!-- <article class="level">
                     <div class="collapsed">
-                        <h3 class="title">Nível 2</h3>
+                        <h3>Nível 2</h3>
                         <i class="far fa-edit"></i>
                     </div>
                 </article>
 
                 <article class="level">
                     <div class="collapsed">
-                        <h3 class="title">Nível 3</h3>
+                        <h3>Nível 3</h3>
                         <i class="far fa-edit"></i>
                     </div>
-                </article>
+                </article> -->
 
                 <button onclick="validate_levels()">Finalizar Quizz</button>
             </section>
 
-            <section class="success">
+            <section class="success hidden">
                 <h2>Seu quizz está pronto!</h2>
 
                 <div class="created-quizz">
