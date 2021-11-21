@@ -26,6 +26,14 @@
     font-size: 20px;
 }
 
+.quizz-creation section .list {
+    width: 100%;
+    /* max-width of input + 2 * this list padding (564 + 2 * 18)px */
+    max-width: 600px;
+    
+    padding: 0 18px;
+}
+
 /* Entry to group fields */
 .quizz-creation section .entry {
     display: flex;
@@ -58,10 +66,9 @@
     align-items: center;
     
     width: 100%;
-    /* max-width of input + article padding (564 + 18)px */
-    max-width: 582px;
-    
-    padding: 0 18px;
+
+    /* Overwriting external CSS */
+    padding: 0;
     /* Separating articles within quizz creation (questions, levels) */
     margin-bottom: 70px;
 }
@@ -71,6 +78,18 @@
     justify-content: space-between;
 
     width: 100%;
+}
+
+.quizz-creation article .collapsed.hidden {
+    display: none;
+}
+
+.quizz-creation article .editing {
+    width: 100%;
+}
+
+.quizz-creation article .editing.hidden {
+    display: none;
 }
 
 .quizz-creation article .collapsed .fa-edit {

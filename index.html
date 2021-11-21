@@ -60,98 +60,41 @@
             <section class="basic-info">
                 <h2>Comece pelo começo</h2>
 
-                <article>
-                    <div class="entry">
-                        <input class="title" placeholder="Título do seu quizz" />
-                        <input class="image-URL" placeholder="URL da imagem do seu quizz" />
-                        <input class="num-questions" placeholder="Quantidade de perguntas do quizz" />
-                        <input class="num-levels" placeholder="Quantidade de níveis do quizz" />
-                    </div>
-                </article>
+                <div class="list">
+                    <article>
+                        <div class="entry">
+                            <input class="title" placeholder="Título do seu quizz" />
+                            <input class="image-URL" placeholder="URL da imagem do seu quizz" />
+                            <input class="num-questions" placeholder="Quantidade de perguntas do quizz" />
+                            <input class="num-levels" placeholder="Quantidade de níveis do quizz" />
+                        </div>
+                    </article>
+                </div>
 
-                <button onclick="validate_basic_info()">Prosseguir pra criar perguntas</button>
+                <!-- <button onclick="validate_basic_info()">Prosseguir pra criar perguntas</button> -->
+                <button onclick="go_to_questions()">Prosseguir pra criar perguntas</button>
             </section>
 
             <section class="questions hidden">
                 <h2>Crie suas perguntas</h2>
 
-                <article class="question">
-                    <div class="entry">
-                        <h3>Pergunta 1</h3>
-                        <input class="text" placeholder="Texto da pergunta" />
-                        <input class="background" placeholder="Cor de fundo da pergunta" />
-                    </div>
-        
-                    <div class="correct-answer entry">
-                        <h3>Resposta correta</h3>
-                        <input class="text" placeholder="Resposta correta" />
-                        <input class="image" placeholder="URL da imagem" />
-                    </div>
-        
-                    <div class="incorrect-answers entry">
-                        <h3>Respostas incorretas</h3>
-                        <input class="text" placeholder="Resposta incorreta 1" />
-                        <input class="image" placeholder="URL da imagem 1" />
-                    </div>
-        
-                    <!-- Other incorrect answers -->
-                    <div class="incorrect-answers entry">
-                        <input class="text" placeholder="Resposta incorreta 2" />
-                        <input class="image" placeholder="URL da imagem 2" />
-                    </div>
-                    <div class="incorrect-answers entry">
-                        <input class="text" placeholder="Resposta incorreta 3" />
-                        <input class="image" placeholder="URL da imagem 3" />
-                    </div>
-                </article>
+                <div class="list">
+                    <!-- Questions filled by JS -->
+                </div>
 
-                <!-- I am not working with collapsed yet -->
-                <!-- <article class="question">
-                    <div class="collapsed">
-                        <h3>Pergunta 2</h3>
-                        <i class="far fa-edit"></i>
-                    </div>
-                </article>
-
-                <article class="question">
-                    <div class="collapsed">
-                        <h3>Pergunta 3</h3>
-                        <i class="far fa-edit"></i>
-                    </div>
-                </article> -->
-
-                <button onclick="validate_questions()">Prosseguir pra criar níveis</button>
+                <!-- <button onclick="validate_questions()">Prosseguir pra criar níveis</button> -->
+                <button onclick="go_to_levels()">Prosseguir pra criar níveis</button>
             </section>
 
             <section class="levels hidden">
                 <h2>Agora, decida os níveis</h2>
 
-                <article class="level">
-                    <div class="entry">
-                        <h3>Nível 1</h3>
-                        <input class="title" placeholder="Título do nível" />
-                        <input class="min-value" placeholder="% de acerto mínima" />
-                        <input class="image" placeholder="URL da imagem do nível" />
-                        <textarea class="description" placeholder="Descrição do nível"></textarea>
-                    </div>
-                </article>
+                <div class="list">
+                    <!-- Levels filled by JS -->
+                </div>
 
-                <!-- I am not working with collapsed yet -->
-                <!-- <article class="level">
-                    <div class="collapsed">
-                        <h3>Nível 2</h3>
-                        <i class="far fa-edit"></i>
-                    </div>
-                </article>
-
-                <article class="level">
-                    <div class="collapsed">
-                        <h3>Nível 3</h3>
-                        <i class="far fa-edit"></i>
-                    </div>
-                </article> -->
-
-                <button onclick="validate_levels()">Finalizar Quizz</button>
+                <!-- <button onclick="validate_levels()">Finalizar Quizz</button> -->
+                <button onclick="go_to_success()">Finalizar Quizz</button>
             </section>
 
             <section class="success hidden">

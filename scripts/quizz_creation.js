@@ -1,4 +1,6 @@
 let new_quizz = {};
+let num_questions = 5;
+let num_levels = 4;
 
 function question_to_json(question) {
     let json_question = {};
@@ -14,7 +16,9 @@ function question_to_json(question) {
     json_question.answers.push(answer_to_json(correct_answer, true));
 
     // Add incorrect answers
-    const incorrect_answers = question.querySelectorAll(".incorrect-answers");
+    const incorrect_answers = Array.from(
+        question.querySelectorAll(".incorrect-answer")
+    );
     incorrect_answers.filter(a => !blank_answer(a)).forEach(answer => {
         json_question.answers.push(answer_to_json(answer, false));
     });
@@ -82,8 +86,8 @@ function validate_basic_info() {
 
     const title = info_entry.querySelector(".title").value.trim();
     const image_URL = info_entry.querySelector(".image-URL").value.trim();
-    const num_questions = parseInt(info_entry.querySelector(".num-questions").value.trim());
-    const num_levels = parseInt(info_entry.querySelector(".num-levels").value.trim());
+    num_questions = parseInt(info_entry.querySelector(".num-questions").value.trim());
+    num_levels = parseInt(info_entry.querySelector(".num-levels").value.trim());
 
     // Alert user if some input is invalid
     const valid_info = 
@@ -111,6 +115,13 @@ function go_to_questions() {
     // Show questions entry
     const questions = document.querySelector(".quizz-creation .questions");
     questions.classList.remove("hidden");
+
+    // Fill question list
+    const question_list = questions.querySelector(".list");
+    question_list.innerHTML = question_html(1, true);
+    for(let i = 2; i <= num_questions; i++) {
+        question_list.innerHTML += question_html(i, false);
+    }
 
     window.scrollTo(0, 0);
 }
@@ -159,7 +170,7 @@ function valid_question(question) {
     const correct_answer = question.querySelector(".correct-answer");
 
     const incorrect_answers = Array.from(
-        question.querySelectorAll(".incorrect-answers")
+        question.querySelectorAll(".incorrect-answer")
     );
 
     const filled_incorrect_answers = incorrect_answers
@@ -189,6 +200,13 @@ function go_to_levels() {
     // Show levels entry
     const levels = document.querySelector(".quizz-creation .levels");
     levels.classList.remove("hidden");
+
+    // Fill level list
+    const level_list = levels.querySelector(".list");
+    level_list.innerHTML = level_html(1, true);
+    for(let i = 2; i <= num_levels; i++) {
+        level_list.innerHTML += level_html(i, false);
+    }
 
     window.scrollTo(0, 0);
 }
@@ -253,5 +271,119 @@ function go_to_success() {
     const success = document.querySelector(".quizz-creation .success");
     success.classList.remove("hidden");
 
+    window.scrollTo(0, 0);
+
     console.dir(new_quizz);
+}
+
+function question_html(index, current) {
+    return `
+        <article class="question ${current ? "current" : ""}">
+            <!-- Show it when question is collapsed (not current) -->
+            <div class="collapsed ${current ? "hidden" : ""}">
+                <h3>Pergunta ${index}</h3>
+                <i class="far fa-edit" onclick="edit_question(this.parentElement.parentElement)"></i>
+            </div>
+
+            <div class="editing ${current ? "" : "hidden"}">
+                <div class="entry">
+                    <h3>Pergunta ${index}</h3>
+                    <input class="text" placeholder="Texto da pergunta" />
+                    <input class="background" placeholder="Cor de fundo da pergunta" />
+                </div>
+
+                <div class="correct-answer entry">
+                    <h3>Resposta correta</h3>
+                    <input class="text" placeholder="Resposta correta" />
+                    <input class="image" placeholder="URL da imagem" />
+                </div>
+
+                <!-- Incorrect answers -->
+                <div class="incorrect-answer entry">
+                    <h3>Respostas incorretas</h3>
+                    <input class="text" placeholder="Resposta incorreta 1" />
+                    <input class="image" placeholder="URL da imagem 1" />
+                </div>
+
+                <div class="incorrect-answer entry">
+                    <input class="text" placeholder="Resposta incorreta 2" />
+                    <input class="image" placeholder="URL da imagem 2" />
+                </div>
+                <div class="incorrect-answer entry">
+                    <input class="text" placeholder="Resposta incorreta 3" />
+                    <input class="image" placeholder="URL da imagem 3" />
+                </div>
+            </div>
+        </article>
+    `;
+}
+
+function level_html(index, current) {
+    return `
+        <article class="level ${current ? "current" : ""}">
+            <!-- Show it when level is collapsed (not current) -->
+            <div class="collapsed ${current ? "hidden" : ""}">
+                <h3>Nível ${index}</h3>
+                <i class="far fa-edit" onclick="edit_level(this.parentElement.parentElement)"></i>
+            </div>
+
+            <div class="editing ${current ? "" : "hidden"}">
+                <div class="entry">
+                    <h3>Nível ${index}</h3>
+                    <input class="title" placeholder="Título do nível" />
+                    <input class="min-value" placeholder="% de acerto mínima" />
+                    <input class="image" placeholder="URL da imagem do nível" />
+                    <textarea class="description" placeholder="Descrição do nível"></textarea>
+                </div>
+            </div>
+        </article>
+    `;
+}
+
+function edit_question(question) {
+    // Collapse previous editing question
+    const questions = document.querySelector(".quizz-creation .questions");
+    const prev_question = questions.querySelector(".current");
+
+    const prev_question_collapsed = prev_question.querySelector(".collapsed");
+    prev_question_collapsed.classList.remove("hidden");
+    const prev_question_editing = prev_question.querySelector(".editing");
+    prev_question_editing.classList.add("hidden");
+    prev_question.classList.remove("current");
+
+    // Show this question editing
+    const question_collapsed = question.querySelector(".collapsed");
+    question_collapsed.classList.add("hidden");
+    const question_editing = question.querySelector(".editing");
+    question_editing.classList.remove("hidden");
+    question.classList.add("current");
+
+    question.scrollIntoView({block: "start"});
+
+    // Because of top bar
+    window.scrollBy(0, -89);
+}
+
+function edit_level(level) {
+    // Collapse previous editing level
+    const levels = document.querySelector(".quizz-creation .levels");
+    const prev_level = levels.querySelector(".current");
+
+    const prev_level_collapsed = prev_level.querySelector(".collapsed");
+    prev_level_collapsed.classList.remove("hidden");
+    const prev_level_editing = prev_level.querySelector(".editing");
+    prev_level_editing.classList.add("hidden");
+    prev_level.classList.remove("current");
+
+    // Show this question editing
+    const level_collapsed = level.querySelector(".collapsed");
+    level_collapsed.classList.add("hidden");
+    const level_editing = level.querySelector(".editing");
+    level_editing.classList.remove("hidden");
+    level.classList.add("current");
+
+    level.scrollIntoView({block: "start"});
+
+    // Because of top bar
+    window.scrollBy(0, -89);
 }
