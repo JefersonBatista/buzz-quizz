@@ -1,6 +1,6 @@
 let new_quizz = {};
-let num_questions = 5;
-let num_levels = 4;
+let num_questions;
+let num_levels;
 
 function question_to_json(question) {
     let json_question = {};
@@ -65,7 +65,7 @@ function valid_URL(URL) {
 
 // Validate hexadecimal code
 function valid_hex(code) {
-    const hex_digits = "0123456789abcdef";
+    const hex_digits = "0123456789abcdefABCDEF";
     const digits_array = Array.from(code.slice(1));
     
     const valid_hex =
@@ -232,7 +232,17 @@ function validate_levels() {
             new_quizz.levels.push(level_to_json(level));
         });
 
-        go_to_success();
+        const creation_promise = axios.post(
+            "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes",
+            new_quizz
+        );
+
+        creation_promise
+            .then(quizz_successfully_created)
+            .catch(({ response }) => {
+                alert("Os dados foram validados, mas algo deu errado na criação do quizz.");
+                console.dir(response.data);
+            });
     } else {
         alert("Insira os dados corretamente.");
     }
@@ -262,6 +272,20 @@ function zero_level(level) {
     return min_value === 0;
 }
 
+function quizz_successfully_created({ data }) {
+    console.log("Quizz successfully created!");
+    console.dir(data);
+
+    const created_quizz = document.querySelector(".quizz-creation .created-quizz");
+    const image_div = created_quizz.querySelector(".image-div");
+    const title = created_quizz.querySelector(".title");
+
+    image_div.innerHTML += new_quizz_image_html();
+    title.innerHTML += new_quizz_title_html();
+
+    go_to_success();
+}
+
 function go_to_success() {
     // Hide levels entry
     const levels = document.querySelector(".quizz-creation .levels");
@@ -272,8 +296,6 @@ function go_to_success() {
     success.classList.remove("hidden");
 
     window.scrollTo(0, 0);
-
-    console.dir(new_quizz);
 }
 
 function question_html(index, current) {
@@ -386,4 +408,16 @@ function edit_level(level) {
 
     // Because of top bar
     window.scrollBy(0, -89);
+}
+
+function new_quizz_image_html() {
+    return `
+        <img src=${new_quizz.image} alt="Imagem do quizz" />
+    `;
+}
+
+function new_quizz_title_html() {
+    return `
+        ${new_quizz.title}
+    `;
 }

@@ -25,7 +25,7 @@
             <h1 class="clickable" onclick="changePage(0)">BuzzQuizz</h1>
         </header>
 
-        <article class="home hidden">
+        <article class="home">
             <section class="user-quizzes ">
             </section>
             <section class="all-quizzes">
@@ -56,7 +56,7 @@
         </article>
 
         <!-- Quizz Creation -->
-        <article class="quizz-creation">
+        <article class="quizz-creation hidden">
             <section class="basic-info">
                 <h2>Comece pelo começo</h2>
 
@@ -98,14 +98,14 @@
                 <h2>Seu quizz está pronto!</h2>
 
                 <div class="created-quizz">
-                    <!-- Roy Mustang Image Bugged Link -->
-                    <!-- "https://static.wikia.nocookie.net/fma/images/f/fd/RoyMustang2009op%C3%A7%C3%A3o3.png/revision/latest/scale-to-width-down/1000?cb=20160110155658&path-prefix=pt-br" -->
-
-                    <img
-                        src="images/RoyMustang.webp"
-                        alt="Imagem do quizz"
-                    />
-                    <h4 class="title">O quanto você sabe de FMA?</h4>
+                    <div class="image-div">
+                        <div class="gradient-cover">
+                            <h4 class="title">
+                                <!-- Title filled by JS -->
+                            </h4>
+                        </div>
+                        <!-- Image filled by JS -->
+                    </div>
                 </div>
 
                 <button>Acessar Quizz</button>
