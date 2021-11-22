@@ -71,7 +71,7 @@
                     </article>
                 </div>
 
-                <button onclick="validate_basic_info()">Prosseguir pra criar perguntas</button>
+                <button onclick="validateBasicInfo()">Prosseguir pra criar perguntas</button>
             </section>
 
             <section class="questions hidden">
@@ -81,7 +81,7 @@
                     <!-- Questions filled by JS -->
                 </div>
 
-                <button onclick="validate_questions()">Prosseguir pra criar níveis</button>
+                <button onclick="validateQuestions()">Prosseguir pra criar níveis</button>
             </section>
 
             <section class="levels hidden">
@@ -91,7 +91,7 @@
                     <!-- Levels filled by JS -->
                 </div>
 
-                <button onclick="validate_levels()">Finalizar Quizz</button>
+                <button onclick="validateLevels()">Finalizar Quizz</button>
             </section>
 
             <section class="success hidden">
@@ -110,7 +110,7 @@
 
                 <button>Acessar Quizz</button>
 
-                <p class="go-to-home">Voltar pra home</p>
+                <p class="go-to-home" onclick="goToHome()">Voltar pra home</p>
             </section>
         </article>
 

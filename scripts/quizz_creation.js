@@ -1,56 +1,56 @@
-let new_quizz = {};
-let num_questions;
-let num_levels;
+let newQuizz = {};
+let numQuestions;
+let numLevels;
 
-function question_to_json(question) {
-    let json_question = {};
+function questionToJson(question) {
+    let jsonQuestion = {};
 
-    json_question.title = question.querySelector(".text").value.trim();
-    json_question.color = question.querySelector(".background").value.trim();
+    jsonQuestion.title = question.querySelector(".text").value.trim();
+    jsonQuestion.color = question.querySelector(".background").value.trim();
 
     // Add answers
-    json_question.answers = [];
+    jsonQuestion.answers = [];
 
     // Add correct answer
-    const correct_answer = question.querySelector(".correct-answer");
-    json_question.answers.push(answer_to_json(correct_answer, true));
+    const correctAnswer = question.querySelector(".correct-answer");
+    jsonQuestion.answers.push(answerToJson(correctAnswer, true));
 
     // Add incorrect answers
-    const incorrect_answers = Array.from(
+    const incorrectAnswers = Array.from(
         question.querySelectorAll(".incorrect-answer")
     );
-    incorrect_answers.filter(a => !blank_answer(a)).forEach(answer => {
-        json_question.answers.push(answer_to_json(answer, false));
+    incorrectAnswers.filter(a => !blankAnswer(a)).forEach(answer => {
+        jsonQuestion.answers.push(answerToJson(answer, false));
     });
 
-    return json_question;
+    return jsonQuestion;
 }
 
-function answer_to_json(answer, correct) {
-    let json_answer = {};
+function answerToJson(answer, correct) {
+    let jsonAnswer = {};
 
-    json_answer.text = answer.querySelector(".text").value.trim();
-    json_answer.image = answer.querySelector(".image").value.trim();
-    json_answer.isCorrectAnswer = correct;
+    jsonAnswer.text = answer.querySelector(".text").value.trim();
+    jsonAnswer.image = answer.querySelector(".image").value.trim();
+    jsonAnswer.isCorrectAnswer = correct;
 
-    return json_answer;
+    return jsonAnswer;
 }
 
-function level_to_json(level) {
-    let json_level = {};
+function levelToJson(level) {
+    let jsonLevel = {};
 
-    json_level.title = level.querySelector(".title").value.trim();
-    json_level.minValue = parseInt(level.querySelector(".min-value").value.trim());
-    json_level.image = level.querySelector(".image").value.trim();
-    json_level.text = level.querySelector(".description").value.trim();
+    jsonLevel.title = level.querySelector(".title").value.trim();
+    jsonLevel.minValue = parseInt(level.querySelector(".min-value").value.trim());
+    jsonLevel.image = level.querySelector(".image").value.trim();
+    jsonLevel.text = level.querySelector(".description").value.trim();
 
-    return json_level;
+    return jsonLevel;
 }
 
-const blank_text = text => text.trim().length === 0;
+const blankText = text => text.trim().length === 0;
 
 // Validate URL
-function valid_URL(URL) {
+function validUrl(url) {
     const pattern = new RegExp('^(https?:\\/\\/)'+ // protocol
         '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
         '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
@@ -58,141 +58,141 @@ function valid_URL(URL) {
         '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
         '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
     
-    const test = pattern.test(URL);
+    const test = pattern.test(url);
     console.log("URL test: " + test);
     return test;
 }
 
 // Validate hexadecimal code
-function valid_hex(code) {
-    const hex_digits = "0123456789abcdefABCDEF";
-    const digits_array = Array.from(code.slice(1));
+function validHex(code) {
+    const hexDigits = "0123456789abcdefABCDEF";
+    const digitsArray = Array.from(code.slice(1));
     
-    const valid_hex =
+    const validHex =
         code[0] === "#" &&
-        digits_array.length === 6 &&
+        digitsArray.length === 6 &&
 
         // Filter invalid digits. No one must be present
-        digits_array
-            .filter(d => !hex_digits.includes(d))
+        digitsArray
+            .filter(d => !hexDigits.includes(d))
             .length === 0;
 
-    console.log("hex test: " + valid_hex);
-    return valid_hex;
+    console.log("hex test: " + validHex);
+    return validHex;
 }
 
-function validate_basic_info() {
-    const info_entry = document.querySelector(".quizz-creation .basic-info .entry");
+function validateBasicInfo() {
+    const infoEntry = document.querySelector(".quizz-creation .basic-info .entry");
 
-    const title = info_entry.querySelector(".title").value.trim();
-    const image_URL = info_entry.querySelector(".image-URL").value.trim();
-    num_questions = parseInt(info_entry.querySelector(".num-questions").value.trim());
-    num_levels = parseInt(info_entry.querySelector(".num-levels").value.trim());
+    const title = infoEntry.querySelector(".title").value.trim();
+    const imageUrl = infoEntry.querySelector(".image-URL").value.trim();
+    numQuestions = parseInt(infoEntry.querySelector(".num-questions").value.trim());
+    numLevels = parseInt(infoEntry.querySelector(".num-levels").value.trim());
 
     // Alert user if some input is invalid
-    const valid_info = 
+    const validInfo = 
         title.length >= 20 && title.length <= 65 &&
-        valid_URL(image_URL) &&
-        num_questions >= 3 &&
-        num_levels >= 2;
+        validUrl(imageUrl) &&
+        numQuestions >= 3 &&
+        numLevels >= 2;
 
-    if (valid_info) {
+    if (validInfo) {
         // Add basic info to new quizz
-        new_quizz.title = title;
-        new_quizz.image = image_URL;
+        newQuizz.title = title;
+        newQuizz.image = imageUrl;
 
-        go_to_questions();
+        goToQuestions();
     } else {
         alert("Insira os dados corretamente.");
     }
 }
 
-function go_to_questions() {
+function goToQuestions() {
     // Hide basic info entry
-    const basic_info = document.querySelector(".quizz-creation .basic-info");
-    basic_info.classList.add("hidden");
+    const basicInfo = document.querySelector(".quizz-creation .basic-info");
+    basicInfo.classList.add("hidden");
 
     // Show questions entry
     const questions = document.querySelector(".quizz-creation .questions");
     questions.classList.remove("hidden");
 
     // Fill question list
-    const question_list = questions.querySelector(".list");
-    question_list.innerHTML = question_html(1, true);
-    for(let i = 2; i <= num_questions; i++) {
-        question_list.innerHTML += question_html(i, false);
+    const questionList = questions.querySelector(".list");
+    questionList.innerHTML = questionHtml(1, true);
+    for(let i = 2; i <= numQuestions; i++) {
+        questionList.innerHTML += questionHtml(i, false);
     }
 
     window.scrollTo(0, 0);
 }
 
-const valid_answer = answer => {
+const validAnswer = answer => {
     const text = answer.querySelector(".text").value.trim();
-    const image_URL = answer.querySelector(".image").value.trim();
+    const imageUrl = answer.querySelector(".image").value.trim();
 
-    return text.length > 0 && valid_URL(image_URL);
+    return text.length > 0 && validUrl(imageUrl);
 }
 
-const blank_answer = answer => {
+const blankAnswer = answer => {
     const text = answer.querySelector(".text").value;
-    const image_URL = answer.querySelector(".image").value;
+    const imageUrl = answer.querySelector(".image").value;
 
-    return blank_text(text) && blank_text(image_URL);
+    return blankText(text) && blankText(imageUrl);
 }
 
-function validate_questions() {
+function validateQuestions() {
     const questions = Array.from(
         document.querySelectorAll(".quizz-creation .questions .question")
     );
     
     // No invalid questions must be present
-    const valid_questions = questions
-        .filter(q => !valid_question(q))
+    const validQuestions = questions
+        .filter(q => !validQuestion(q))
         .length === 0;
 
     // Alert user if some question is invalid
-    if (valid_questions) {
+    if (validQuestions) {
         // Add questions to new quizz
-        new_quizz.questions = [];
+        newQuizz.questions = [];
         questions.forEach(question => {
-            new_quizz.questions.push(question_to_json(question));
+            newQuizz.questions.push(questionToJson(question));
         });
 
-        go_to_levels();
+        goToLevels();
     } else {
         alert("Insira os dados corretamente.");
     }
 }
 
-function valid_question(question) {
+function validQuestion(question) {
     const text = question.querySelector(".text").value.trim();
     const background = question.querySelector(".background").value.trim();
-    const correct_answer = question.querySelector(".correct-answer");
+    const correctAnswer = question.querySelector(".correct-answer");
 
-    const incorrect_answers = Array.from(
+    const incorrectAnswers = Array.from(
         question.querySelectorAll(".incorrect-answer")
     );
 
-    const filled_incorrect_answers = incorrect_answers
-        .filter(a => !blank_answer(a));
+    const filledIncorrectAnswers = incorrectAnswers
+        .filter(a => !blankAnswer(a));
     
-    const valid_question = 
+    const validQuestion = 
         text.length >= 20 &&
-        valid_hex(background) &&
-        valid_answer(correct_answer) &&
+        validHex(background) &&
+        validAnswer(correctAnswer) &&
         
         // At least one filled incorrect answer
-        filled_incorrect_answers.length > 0 &&
+        filledIncorrectAnswers.length > 0 &&
 
         // None invalid filled incorrect answer
-        filled_incorrect_answers
-            .filter(a => !valid_answer(a))
+        filledIncorrectAnswers
+            .filter(a => !validAnswer(a))
             .length === 0;
 
-    return valid_question;
+    return validQuestion;
 }
 
-function go_to_levels() {
+function goToLevels() {
     // Hide questions entry
     const questions = document.querySelector(".quizz-creation .questions");
     questions.classList.add("hidden");
@@ -202,43 +202,43 @@ function go_to_levels() {
     levels.classList.remove("hidden");
 
     // Fill level list
-    const level_list = levels.querySelector(".list");
-    level_list.innerHTML = level_html(1, true);
-    for(let i = 2; i <= num_levels; i++) {
-        level_list.innerHTML += level_html(i, false);
+    const levelList = levels.querySelector(".list");
+    levelList.innerHTML = levelHtml(1, true);
+    for(let i = 2; i <= numLevels; i++) {
+        levelList.innerHTML += levelHtml(i, false);
     }
 
     window.scrollTo(0, 0);
 }
 
-function validate_levels() {
+function validateLevels() {
     const levels = Array.from(
         document.querySelectorAll(".quizz-creation .levels .level")
     );
 
     // No invalid levels must be present
-    const valid_levels = levels
-        .filter(l => !valid_level(l))
+    const validLevels = levels
+        .filter(l => !validLevel(l))
         .length === 0 &&
 
     // At least one "zero level"
-    levels.filter(zero_level).length > 0;
+    levels.filter(zeroLevel).length > 0;
 
     // Alert user if some level is invalid
-    if (valid_levels) {
+    if (validLevels) {
         // Add levels to new quizz
-        new_quizz.levels = [];
+        newQuizz.levels = [];
         levels.forEach(level => {
-            new_quizz.levels.push(level_to_json(level));
+            newQuizz.levels.push(levelToJson(level));
         });
 
-        const creation_promise = axios.post(
+        const creationPromise = axios.post(
             "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes",
-            new_quizz
+            newQuizz
         );
 
-        creation_promise
-            .then(quizz_successfully_created)
+        creationPromise
+            .then(quizzSuccessfullyCreated)
             .catch(({ response }) => {
                 alert("Os dados foram validados, mas algo deu errado na criação do quizz.");
                 console.dir(response.data);
@@ -248,45 +248,57 @@ function validate_levels() {
     }
 }
 
-function valid_level(level) {
+function validLevel(level) {
     console.log('Is valid level?');
 
     const title = level.querySelector(".title").value.trim();
-    const min_value = parseInt(level.querySelector(".min-value").value.trim());
-    const image_URL = level.querySelector(".image").value.trim();
+    const minValue = parseInt(level.querySelector(".min-value").value.trim());
+    const imageUrl = level.querySelector(".image").value.trim();
     const description = level.querySelector(".description").value.trim();
 
-    const valid_level =
+    const validLevel =
         title.length >= 10 &&
-        min_value >= 0 && min_value <= 100 &&
-        valid_URL(image_URL) &&
+        minValue >= 0 && minValue <= 100 &&
+        validUrl(imageUrl) &&
         description.length >= 30;
 
-    return valid_level;
+    return validLevel;
 }
 
-function zero_level(level) {
+function zeroLevel(level) {
     console.log('Is "zero level"?');
-    const min_value = parseInt(level.querySelector(".min-value").value.trim());
-    console.log(min_value === 0);
-    return min_value === 0;
+    const minValue = parseInt(level.querySelector(".min-value").value.trim());
+    console.log(minValue === 0);
+    return minValue === 0;
 }
 
-function quizz_successfully_created({ data }) {
+function quizzSuccessfullyCreated({ data }) {
     console.log("Quizz successfully created!");
     console.dir(data);
 
-    const created_quizz = document.querySelector(".quizz-creation .created-quizz");
-    const image_div = created_quizz.querySelector(".image-div");
-    const title = created_quizz.querySelector(".title");
+    // Store created quizz ID on user's machine
+    let userQuizzIds = localStorage.getItem("userQuizzIds");
 
-    image_div.innerHTML += new_quizz_image_html();
-    title.innerHTML += new_quizz_title_html();
+    if(!userQuizzIds) {
+        userQuizzIds = JSON.stringify([]);
+    }
 
-    go_to_success();
+    userQuizzIds = JSON.parse(userQuizzIds);
+    userQuizzIds.push(data.id);
+    userQuizzIds = JSON.stringify(userQuizzIds);
+    localStorage.setItem("userQuizzIds", userQuizzIds);
+
+    // Add created quizz image to HTML
+    const imageDiv = document.querySelector(".quizz-creation .created-quizz .image-div");
+    imageDiv.innerHTML += newQuizzImageHtml();
+
+    goToSuccess();
 }
 
-function go_to_success() {
+function goToSuccess() {
+    const title = document.querySelector(".quizz-creation .created-quizz .title");
+    title.innerHTML += newQuizzTitleHtml();
+
     // Hide levels entry
     const levels = document.querySelector(".quizz-creation .levels");
     levels.classList.add("hidden");
@@ -298,13 +310,13 @@ function go_to_success() {
     window.scrollTo(0, 0);
 }
 
-function question_html(index, current) {
+function questionHtml(index, current) {
     return `
         <article class="question ${current ? "current" : ""}">
             <!-- Show it when question is collapsed (not current) -->
             <div class="collapsed ${current ? "hidden" : ""}">
                 <h3>Pergunta ${index}</h3>
-                <i class="far fa-edit" onclick="edit_question(this.parentElement.parentElement)"></i>
+                <i class="far fa-edit" onclick="editQuestion(this.parentElement.parentElement)"></i>
             </div>
 
             <div class="editing ${current ? "" : "hidden"}">
@@ -340,13 +352,13 @@ function question_html(index, current) {
     `;
 }
 
-function level_html(index, current) {
+function levelHtml(index, current) {
     return `
         <article class="level ${current ? "current" : ""}">
             <!-- Show it when level is collapsed (not current) -->
             <div class="collapsed ${current ? "hidden" : ""}">
                 <h3>Nível ${index}</h3>
-                <i class="far fa-edit" onclick="edit_level(this.parentElement.parentElement)"></i>
+                <i class="far fa-edit" onclick="editLevel(this.parentElement.parentElement)"></i>
             </div>
 
             <div class="editing ${current ? "" : "hidden"}">
@@ -362,22 +374,22 @@ function level_html(index, current) {
     `;
 }
 
-function edit_question(question) {
+function editQuestion(question) {
     // Collapse previous editing question
     const questions = document.querySelector(".quizz-creation .questions");
-    const prev_question = questions.querySelector(".current");
+    const prevQuestion = questions.querySelector(".current");
 
-    const prev_question_collapsed = prev_question.querySelector(".collapsed");
-    prev_question_collapsed.classList.remove("hidden");
-    const prev_question_editing = prev_question.querySelector(".editing");
-    prev_question_editing.classList.add("hidden");
-    prev_question.classList.remove("current");
+    const prevQuestionCollapsed = prevQuestion.querySelector(".collapsed");
+    prevQuestionCollapsed.classList.remove("hidden");
+    const prevQuestionEditing = prevQuestion.querySelector(".editing");
+    prevQuestionEditing.classList.add("hidden");
+    prevQuestion.classList.remove("current");
 
     // Show this question editing
-    const question_collapsed = question.querySelector(".collapsed");
-    question_collapsed.classList.add("hidden");
-    const question_editing = question.querySelector(".editing");
-    question_editing.classList.remove("hidden");
+    const questionCollapsed = question.querySelector(".collapsed");
+    questionCollapsed.classList.add("hidden");
+    const questionEditing = question.querySelector(".editing");
+    questionEditing.classList.remove("hidden");
     question.classList.add("current");
 
     question.scrollIntoView({block: "start"});
@@ -386,22 +398,22 @@ function edit_question(question) {
     window.scrollBy(0, -89);
 }
 
-function edit_level(level) {
+function editLevel(level) {
     // Collapse previous editing level
     const levels = document.querySelector(".quizz-creation .levels");
-    const prev_level = levels.querySelector(".current");
+    const prevLevel = levels.querySelector(".current");
 
-    const prev_level_collapsed = prev_level.querySelector(".collapsed");
-    prev_level_collapsed.classList.remove("hidden");
-    const prev_level_editing = prev_level.querySelector(".editing");
-    prev_level_editing.classList.add("hidden");
-    prev_level.classList.remove("current");
+    const prevLevelCollapsed = prevLevel.querySelector(".collapsed");
+    prevLevelCollapsed.classList.remove("hidden");
+    const prevLevelEditing = prevLevel.querySelector(".editing");
+    prevLevelEditing.classList.add("hidden");
+    prevLevel.classList.remove("current");
 
     // Show this question editing
-    const level_collapsed = level.querySelector(".collapsed");
-    level_collapsed.classList.add("hidden");
-    const level_editing = level.querySelector(".editing");
-    level_editing.classList.remove("hidden");
+    const levelCollapsed = level.querySelector(".collapsed");
+    levelCollapsed.classList.add("hidden");
+    const levelEditing = level.querySelector(".editing");
+    levelEditing.classList.remove("hidden");
     level.classList.add("current");
 
     level.scrollIntoView({block: "start"});
@@ -410,14 +422,57 @@ function edit_level(level) {
     window.scrollBy(0, -89);
 }
 
-function new_quizz_image_html() {
+function newQuizzImageHtml() {
     return `
-        <img src=${new_quizz.image} alt="Imagem do quizz" />
+        <img src=${newQuizz.image} alt="Imagem do quizz" />
     `;
 }
 
-function new_quizz_title_html() {
+function newQuizzTitleHtml() {
     return `
-        ${new_quizz.title}
+        ${newQuizz.title}
     `;
+}
+
+function cleanUpAllFields() {
+    const fields = Array.from(
+        document.querySelectorAll(".quizz-creation input")
+    );
+
+    fields.forEach(field => {
+        field.value = "";
+    })
+}
+
+function resetQuizzCreation() {
+    cleanUpAllFields();
+
+    const quizzCreation = document.querySelector(".quizz-creation");
+
+    const basicInfo = quizzCreation.querySelector(".basic-info");
+    basicInfo.classList.remove("hidden");
+
+    const questions = quizzCreation.querySelector(".questions");
+    questions.classList.add("hidden");
+
+    const levels = quizzCreation.querySelector(".levels");
+    levels.classList.add("hidden");
+
+    const success = quizzCreation.querySelector(".success");
+    success.classList.add("hidden");
+}
+
+function goToHome() {
+    resetQuizzCreation();
+
+    const home = document.querySelector(".home");
+    home.classList.remove("hidden");
+
+    const quizzGame = document.querySelector(".quizz-game");
+    quizzGame.classList.add("hidden");
+
+    const quizzCreation = document.querySelector(".quizz-creation");
+    quizzCreation.classList.add("hidden");
+
+    resetHome();
 }
