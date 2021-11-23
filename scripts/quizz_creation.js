@@ -1,4 +1,5 @@
 let newQuizz = {};
+let newQuizzId;
 let numQuestions;
 let numLevels;
 
@@ -276,6 +277,8 @@ function quizzSuccessfullyCreated({ data }) {
     console.log("Quizz successfully created!");
     console.dir(data);
 
+    newQuizzId = data.id;
+
     // Store created quizz ID on user's machine
     let userQuizzIds = localStorage.getItem("userQuizzIds");
 
@@ -284,21 +287,18 @@ function quizzSuccessfullyCreated({ data }) {
     }
 
     userQuizzIds = JSON.parse(userQuizzIds);
-    userQuizzIds.push(data.id);
+    userQuizzIds.push(newQuizzId);
     userQuizzIds = JSON.stringify(userQuizzIds);
     localStorage.setItem("userQuizzIds", userQuizzIds);
 
-    // Add created quizz image to HTML
+    // Add created quizz image-div to HTML
     const imageDiv = document.querySelector(".quizz-creation .created-quizz .image-div");
-    imageDiv.innerHTML += newQuizzImageHtml();
+    imageDiv.innerHTML = newQuizzImageDivHtml();
 
     goToSuccess();
 }
 
 function goToSuccess() {
-    const title = document.querySelector(".quizz-creation .created-quizz .title");
-    title.innerHTML += newQuizzTitleHtml();
-
     // Hide levels entry
     const levels = document.querySelector(".quizz-creation .levels");
     levels.classList.add("hidden");
@@ -422,15 +422,14 @@ function editLevel(level) {
     window.scrollBy(0, -89);
 }
 
-function newQuizzImageHtml() {
+function newQuizzImageDivHtml() {
     return `
         <img src=${newQuizz.image} alt="Imagem do quizz" />
-    `;
-}
-
-function newQuizzTitleHtml() {
-    return `
-        ${newQuizz.title}
+        <div class="gradient-cover">
+            <h4 class="title">
+                ${newQuizz.title}
+            </h4>
+        </div>
     `;
 }
 
@@ -445,6 +444,12 @@ function cleanUpAllFields() {
 }
 
 function resetQuizzCreation() {
+    newQuizz = {};
+
+    // Clean created quizz image-div
+    const imageDiv = document.querySelector(".quizz-creation .created-quizz .image-div");
+    imageDiv.innerHTML = "";
+
     cleanUpAllFields();
 
     const quizzCreation = document.querySelector(".quizz-creation");
@@ -475,4 +480,9 @@ function goToHome() {
     quizzCreation.classList.add("hidden");
 
     resetHome();
+}
+
+function goToCreatedQuizz() {
+    goToHome();
+    changePage(1, newQuizzId);
 }

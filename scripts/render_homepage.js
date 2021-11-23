@@ -65,16 +65,16 @@ function renderUserQuizzes () {
         const userQuizzBox = document.querySelector(".user-quizzes .quizz-box")
         userQuizzIds.forEach((quizzId, index) => {
             let quizz;
-            const promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes" + `/${quizzId.id}`);
+            const promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes" + `/${quizzId}`);
             promise.then(response => {
                 quizz = response.data;
                 userQuizzBox.innerHTML += 
-                `<div class="quizz clickable" onclick="changePage(1, ${quizzId.id})">
+                `<div class="quizz clickable" onclick="changePage(1, ${quizzId})">
                     <img src="${quizz.image}">
                     <div class="black-gradient"></div>
                     <div class="box-edit-exclude">
-                        <ion-icon onclick="editUserQuizz(${quizzId.id},'${quizzId.auth}')" name="create-outline"></ion-icon>
-                        <ion-icon onclick="deleteUserQuizz(${quizzId.id},'${quizzId.auth}')" name="trash-outline"></ion-icon>
+                        <ion-icon name="create-outline"></ion-icon>
+                        <ion-icon name="trash-outline"></ion-icon>
                     </div>
                     <div class="title-box">
                         <p>${quizz.title}</p>
@@ -118,7 +118,6 @@ function changePage(pageId, information){
             pages[0].classList.add("hidden");
             pages[1].classList.add("hidden");
             pages[2].classList.remove("hidden");
-            resetAddQuizz(pages[2]);
             break;
         default:
             pages[0].classList.add("hidden");
