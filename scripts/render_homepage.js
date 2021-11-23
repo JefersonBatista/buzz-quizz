@@ -28,7 +28,7 @@ function renderHome(response) {
     allQuizzBox.innerHTML = ""
     quizzes.forEach(quizz => {
         if (!userQuizzIds.includes(quizz.id)){
-            allQuizzBox.innerHTML += `<div class="quizz clickable" onclick="changePage(1, ${quizz.id})">
+            allQuizzBox.innerHTML += `<div class="quizz clickable" data-identifier="quizz-card" onclick="changePage(1, ${quizz.id})">
                 <img src="${quizz.image}">
                 <div class="black-gradient"></div>
                 <div class="title-box">
@@ -51,14 +51,14 @@ function renderUserQuizzes () {
             Você não criou nenhum <br>
             quizz ainda :(
         </p>
-        <button onclick="changePage(2)">
+        <button data-identifier="create-quizz" onclick="changePage(2)">
             <span>Criar Quizz</span>
         </button>
     </div>`;
     if (userQuizzIds.length > 0) {
         userQuizzes.innerHTML = `<div class="section-title">
             <strong>Seus Quizzes</strong>
-            <ion-icon name="add-circle" onclick="changePage(2)"></ion-icon>
+            <ion-icon name="add-circle" data-identifier="create-quizz" onclick="changePage(2)"></ion-icon>
         </div>
         <div class="quizz-box">
         </div>`
@@ -69,7 +69,7 @@ function renderUserQuizzes () {
             promise.then(response => {
                 quizz = response.data;
                 userQuizzBox.innerHTML += 
-                `<div class="quizz clickable" onclick="changePage(1, ${quizzId})">
+                `<div class="quizz clickable" data-identifier="quizz-card" onclick="changePage(1, ${quizzId})">
                     <img src="${quizz.image}">
                     <div class="black-gradient"></div>
                     <div class="box-edit-exclude">

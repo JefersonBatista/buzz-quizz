@@ -316,10 +316,10 @@ function questionHtml(index, current) {
             <!-- Show it when question is collapsed (not current) -->
             <div class="collapsed ${current ? "hidden" : ""}">
                 <h3>Pergunta ${index}</h3>
-                <i class="far fa-edit" onclick="editQuestion(this.parentElement.parentElement)"></i>
+                <i class="far fa-edit" data-identifier="expand" onclick="editQuestion(this.parentElement.parentElement)"></i>
             </div>
 
-            <div class="editing ${current ? "" : "hidden"}">
+            <div class="editing ${current ? "" : "hidden"}" data-identifier="question">
                 <div class="entry">
                     <h3>Pergunta ${index}</h3>
                     <input class="text" placeholder="Texto da pergunta" />
@@ -358,10 +358,10 @@ function levelHtml(index, current) {
             <!-- Show it when level is collapsed (not current) -->
             <div class="collapsed ${current ? "hidden" : ""}">
                 <h3>Nível ${index}</h3>
-                <i class="far fa-edit" onclick="editLevel(this.parentElement.parentElement)"></i>
+                <i class="far fa-edit" data-identifier="expand" onclick="editLevel(this.parentElement.parentElement)"></i>
             </div>
 
-            <div class="editing ${current ? "" : "hidden"}">
+            <div class="editing ${current ? "" : "hidden"}" data-identifier="level">
                 <div class="entry">
                     <h3>Nível ${index}</h3>
                     <input class="title" placeholder="Título do nível" />

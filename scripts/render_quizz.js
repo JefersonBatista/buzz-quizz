@@ -11,12 +11,12 @@ function resetQuizzGame(id){
     quizzGame.innerHTML = `<div class="banner">
     </div>
     <main class="questions">
-        <section class="option">
+        <section class="option" data-identifier="question">
             <div class="alternatives">
             </div>
         </section>
     </main>
-    <section class="results">
+    <section class="results" data-identifier="quizz-result">
     </section>
     <button class="reload-quizz" onclick="changePage(1, ${id})">Reiniciar Quizz</button>
     <button class="back-home" onclick="changePage(0)">Voltar para Home</button>
@@ -70,7 +70,7 @@ function renderQuestions() {
         alternative = alternative.sort(shuffleAlternatives);
         stringAlternatives = "";
         for (let j = 0; j < alternative.length; j++, altId++) {
-            stringAlternatives += `<div class="alternative" onclick="selectAnswer(this)" id="${altId}">
+            stringAlternatives += `<div class="alternative" data-identifier="answer" onclick="selectAnswer(this)" id="${altId}">
                 <img class="alternative-image clickable" src="${questions[i].answers[alternative[j]].image}">
                 <span class="alternative-name">${questions[i].answers[alternative[j]].text}</span>
             </div>
@@ -78,7 +78,7 @@ function renderQuestions() {
             correctAnswers.push(questions[i].answers[alternative[j]].isCorrectAnswer);
         }
         questionsQuizz.innerHTML += `
-        <section class="option">
+        <section class="option" data-identifier="question">
             <h3 class="question-text">${questions[i].title}</h3>
             <div class="alternatives">
                 ${stringAlternatives}
